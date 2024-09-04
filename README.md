@@ -1,5 +1,102 @@
 # Power BI Modeling Topics: Detailed Notes
+# 0. Getting Started with DAX
 
+## Introduction to DAX
+### What is DAX?
+- **DAX (Data Analysis Expressions)** is a formula language used in Power BI, Excel Power Pivot, and SQL Server Analysis Services. It is designed to work with relational data and is similar to Excel formulas but much more powerful.
+
+### Why Use DAX?
+- DAX allows you to create custom calculations and analysis on your data, enabling you to generate insights that are not possible with standard aggregations. It's essential for creating calculated columns, measures, and tables in Power BI.
+
+## Basic Concepts in DAX
+### Syntax
+- DAX formulas consist of functions, operators, and values that are combined to perform calculations.
+- **Example**:
+  ```dax
+  Total Sales = SUM(Sales[Revenue])
+  ```
+## Evaluation Context
+- Row Context: The context of a single row in a table.
+- Filter Context: The context provided by filters in your report.
+## Common DAX Functions
+### Aggregation Functions:
+- SUM, AVERAGE, COUNT, MIN, MAX
+### Example:
+```dax
+Average Sales = AVERAGE(Sales[Revenue])
+```
+- CALCULATE: Modifies the filter context of a calculation.
+### Example:
+```dax
+Sales West Region = CALCULATE(SUM(Sales[Revenue]), Sales[Region] = "West")
+```
+## Conditional Functions:
+- IF, SWITCH
+### Example:
+```dax
+Sales Category = IF(Sales[Revenue] > 5000, "High", "Low")
+```
+# Data Modeling Basics: Tabular Model
+## Introduction to Data Modeling
+### What is Data Modeling?
+- Data modeling in Power BI involves creating a structured and organized representation of your data using tables, relationships, and calculated fields. The goal is to make your data easier to analyze and to enhance performance.
+### Importance of Data Modeling
+- Good data modeling practices ensure your reports are scalable, performant, and easy to maintain. They also enable you to create more complex and accurate calculations with DAX.
+### Basic Components of a Tabular Model
+#### Tables
+- Tables store data in a structured format and are the foundation of your data model.
+#### Columns
+- Columns represent fields in your data. They can be imported from your source or created using DAX.
+#### Relationships
+- Relationships define how tables in your model are connected. They allow you to create reports that pull data from multiple tables.
+#### Calculated Columns and Measures
+Calculated Columns: Created using DAX, these columns store values that are calculated row by row.
+#### Example:
+``` dax
+Total Cost = Sales[Quantity] * Products[Unit Price]
+```
+- Measures: Dynamic calculations performed on the fly based on user interactions with the report.
+#### Example:
+```dax
+Total Sales = SUM(Sales[Revenue])
+```
+## What is DAX - Overview
+### Introduction to DAX
+- DAX stands for Data Analysis Expressions. It is a collection of functions, operators, and constants that can be used in a formula or expression to calculate and return one or more values.
+### Key Features of DAX
+- Relational Data Handling: DAX is designed to work with data in a relational model, making it ideal for use in Power BI and similar tools.
+- Flexible Calculations: With DAX, you can create measures and calculated columns that update dynamically based on report filters.
+### Why Learn DAX?
+### Enhanced Analytics:
+- Learning DAX allows you to unlock the full potential of Power BI by enabling more sophisticated data analysis.
+### Customization:
+- With DAX, you can create custom calculations and reports tailored to your specific needs.
+## What is DAX - Tabular
+### DAX in the Tabular Model
+- What is the Tabular Model?
+- The Tabular model is a data model structure used in Power BI, SQL Server Analysis Services, and Excel Power Pivot. It stores data in tables and uses relationships between these tables to organize and manage data.
+### DAX in Tabular Models
+DAX is the language used to create calculations in the Tabular model. It allows you to create calculated columns, measures, and calculated tables that extend the functionality of your data model.
+### Advantages of DAX in Tabular Models
+- Performance: DAX is optimized for fast calculations, even with large datasets.
+- Scalability: The Tabular model combined with DAX supports large-scale analytics, making it suitable for enterprise-level solutions.
+### Getting Started with DAX in the Tabular Model
+#### Creating a Calculated Column
+- Use DAX to create a column that performs a calculation on each row of a table.
+#### Example:
+```dax
+
+Total Cost = Sales[Quantity] * Products[Unit Price]
+```
+#### Creating a Measure
+- Measures are DAX formulas used to calculate values based on user interactions with your report.
+#### Example:
+```dax
+Total Sales = SUM(Sales[Revenue])
+```
+### Building a Data Model
+- Combine tables using relationships and use DAX to create dynamic calculations that enhance your Power BI reports.
+  
 ## 1. Calculated Columns
 
 ### **What are Calculated Columns?**
