@@ -627,4 +627,123 @@ This session has covered advanced Power BI modeling techniques, including the cr
 
 --- 
 
-Feel free to modify or expand on any of these sections for your session on Power BI!
+# Using X Functions and A Functions in DAX
+
+## Introduction to X Functions
+- **X Functions** in DAX are iterator functions that operate over a table of data and evaluate an expression for each row. These functions include an `X` at the end of their names, distinguishing them from their non-iterative counterparts.
+
+### Common X Functions
+- **SUMX**: Iterates over a table, evaluating an expression for each row, and then sums the results.
+  - **Example**:
+    ```dax
+    Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[Price])
+    ```
+- **AVERAGEX**: Calculates the average of an expression evaluated for each row in a table.
+  - **Example**:
+    ```dax
+    Average Price = AVERAGEX(Sales, Sales[Price])
+    ```
+- **MINX, MAXX**: Return the minimum or maximum value of an expression evaluated for each row.
+  - **Example**:
+    ```dax
+    Min Cost = MINX(Products, Products[Cost])
+    ```
+
+## Introduction to A Functions
+- **A Functions** are aggregation functions in DAX that operate across an entire column or expression, aggregating the results without iterating row by row.
+
+### Common A Functions
+- **SUM**: Adds all the numbers in a column.
+  - **Example**:
+    ```dax
+    Total Sales = SUM(Sales[Revenue])
+    ```
+- **AVERAGE**: Calculates the mean of a numeric column.
+  - **Example**:
+    ```dax
+    Average Sales = AVERAGE(Sales[Revenue])
+    ```
+- **MIN, MAX**: Return the smallest or largest value in a column.
+  - **Example**:
+    ```dax
+    Min Price = MIN(Products[Price])
+    ```
+
+---
+
+# Table Functions in DAX
+
+## Introduction to Table Functions
+- **Table Functions** return a table instead of a single value. These functions are powerful in creating intermediate tables that can be used in further calculations or visualizations.
+
+### Common Table Functions
+- **FILTER**: Returns a table that has been filtered based on a condition.
+  - **Example**:
+    ```dax
+    High Revenue Sales = FILTER(Sales, Sales[Revenue] > 1000)
+    ```
+- **ALL**: Removes all filters from a table or column, returning all rows.
+  - **Example**:
+    ```dax
+    All Products = ALL(Products)
+    ```
+- **VALUES**: Returns a single-column table containing the distinct values from a column.
+  - **Example**:
+    ```dax
+    Unique Products = VALUES(Products[ProductName])
+    ```
+- **CROSSJOIN**: Returns the Cartesian product of two tables.
+  - **Example**:
+    ```dax
+    Product Sales = CROSSJOIN(Products, Sales)
+    ```
+
+---
+
+# DAX as a Query Language
+
+## Introduction to DAX Queries
+- DAX is not just a calculation language; it can also be used as a query language to retrieve data from a data model. This capability is especially useful in scenarios where you need to extract specific data sets or when working with analysis tools that can execute DAX queries.
+
+### Basic DAX Query Structure
+- A DAX query starts with the `EVALUATE` statement, followed by an expression that returns a table.
+  - **Example**:
+    ```dax
+    EVALUATE
+    FILTER(Sales, Sales[Revenue] > 1000)
+    ```
+
+### Using DAX Queries
+- **Selecting Columns**:
+  - You can select specific columns from a table by listing them in the query.
+  - **Example**:
+    ```dax
+    EVALUATE
+    SELECTCOLUMNS(
+        Sales,
+        "Product", Sales[ProductName],
+        "Revenue", Sales[Revenue]
+    )
+    ```
+- **Applying Filters**:
+  - Filters can be applied to restrict the rows returned by the query.
+  - **Example**:
+    ```dax
+    EVALUATE
+    FILTER(
+        Products,
+        Products[Category] = "Electronics"
+    )
+    ```
+- **Ordering Results**:
+  - Use the `ORDER BY` clause to sort the results of your query.
+  - **Example**:
+    ```dax
+    EVALUATE
+    FILTER(
+        Sales,
+        Sales[Revenue] > 1000
+    )
+    ORDER BY Sales[Revenue] DESC
+    ```
+
