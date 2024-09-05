@@ -1,0 +1,34 @@
+# Student Test Project Assessment: Data Modeling, Data Cleaning & Transformation
+
+## Project Overview
+In this project, you will work with a dataset of student test scores to build a data model, clean the data, and transform it using the concepts of data modeling, DAX, and Power BI functions learned in class.
+
+### Dataset Description:
+The dataset contains student test results from multiple classes. It includes the following columns:
+
+- **StudentID**: A unique identifier for each student.
+- **StudentName**: The name of the student.
+- **Class**: The class or section the student belongs to.
+- **Subject**: The subject for which the test was conducted.
+- **TestDate**: The date the test was taken.
+- **Score**: The score obtained by the student.
+- **MaxScore**: The maximum score possible for the test.
+
+### Objective:
+You are required to:
+1. Clean and transform the data to remove errors and inconsistencies.
+2. Create a data model to enable analysis of student performance.
+3. Use DAX to perform calculations such as the average score, total score, and pass/fail status.
+4. Build visualizations to present key insights from the dataset.
+
+---
+
+## Step 1: Data Cleaning & Transformation
+
+### Tasks:
+1. **Handling Missing Values**:
+   - Identify missing values in the `StudentName`, `TestDate`, and `Score` columns.
+   - Replace missing values in the `StudentName` with "Unknown" and in the `Score` with 0.
+
+   ```dax
+   CleanedData = IF(ISBLANK([StudentName]), "Unknown", [StudentName])
