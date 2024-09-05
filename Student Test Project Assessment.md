@@ -108,13 +108,13 @@ You are required to:
 - Screenshots of the final dashboard.
 
 # Data Sets
-| StudentID | FirstName | LastName | TestDate   | Subject         | Score | TotalValue |
+| StudentID | FirstName | LastName | TestDate   | Subject         | Score | MaxScore |
 |-----------|-----------|----------|------------|-----------------|-------|------------|
-| 1         | Alice     | Johnson  | 2024-03-15 | Mathematics     | 85    | 85         |
-| 2         | Bob       | Smith    | 2024-03-15 | English         | 78    | 78         |
+| 1         | Alice     | Johnson  | 2024-03-15 | Mathematics     | 85    | 100        |
+| 2         | Bob       | Smith    | 2024-03-15 | English         | 78    | 100        |
 | 3         | Charlie   | Davis    | 2024-03-15 | Science         | 92    | 92         |
 | 4         | Diana     | Brown    | 2024-03-15 | History         | 88    | 88         |
-| 5         | Ethan     | Wilson   | 2024-03-15 | Geography       | 75    | 75         |
+| 5         | Ethan     | Wilson   | 2024-03-15 | Geography       | 75    | 100        |
 | 6         | Fiona     | Taylor   | 2024-03-15 | Mathematics     | 90    | 90         |
 | 7         | George    | Clark    | 2024-03-15 | English         | 82    | 82         |
 | 8         | Hannah    | Adams    | 2024-03-15 | Science         | 86    | 86         |
