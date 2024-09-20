@@ -746,4 +746,86 @@ This session has covered advanced Power BI modeling techniques, including the cr
     )
     ORDER BY Sales[Revenue] DESC
     ```
+# Advanced DAX Functions in Power BI
 
+## FIND Function
+- **Purpose**: Locates one text string within another, returning the position of the first occurrence of the searched text.
+- **Syntax**: 
+```dax
+  FIND(search_text, within_text [, start_position] [, not_found_value])
+```
+- **search_text**: The text you are looking for.
+- **within_text**: The text string to be searched.
+- **start_position** (optional): Starting point to begin the search (defaults to 1).
+- **not_found_value** (optional): Value to return if the text is not found.
+
+### Example:
+```dax
+FIND("cat", "category")  // Returns 1
+```
+## SEARCH and SUBSTITUTE Functions
+
+### SEARCH Function
+- **Purpose**: Similar to FIND but **case-insensitive**.
+- **Syntax**:
+  ```dax
+  SEARCH(search_text, within_text [, start_position] [, not_found_value])
+  ```
+  - **search_text**: The text you are looking for.
+- **within_text**: The text string to be searched.
+- **start_position** (optional): Starting point to begin the search (defaults to 1).
+- **not_found_value** (optional): Value to return if the text is not found.
+
+### Example:
+```dax
+SEARCH("Cat", "Category")  // Returns 1
+```
+## SUBSTITUTE Function
+
+- **Purpose**: Replaces occurrences of a substring within a text string with another substring.
+- **Syntax**:
+```dax
+  SUBSTITUTE(text, old_text, new_text [, instance_number])
+```
+- text: The original text.
+- old_text: The text to replace.
+- new_text: The text that will replace old_text.
+- instance_number (optional): Specify which occurrence of the old_text to replace (default is all occurrences).
+### Example:
+```dax
+SUBSTITUTE("Power BI is awesome", "awesome", "great")  
+// Returns: "Power BI is great"
+```
+## ALLSELECTED Function
+
+- **Purpose**: Removes context filters from the table or column while retaining any filter applied by the user through visual interaction (like slicers).
+- **Syntax**:
+  ```dax
+  ALLSELECTED([table/column])
+  ```
+- table/column: The table or column to remove filters from.
+- Use Case: When you need to calculate metrics like running totals or percentages that take into account filters applied in the visuals but ignore other filters.
+
+### Example:
+```dax
+
+CALCULATE(SUM(Sales[Revenue]), ALLSELECTED(Sales[Product]))
+```
+- This would calculate the sum of revenue based on the user's selected filter but ignoring other filters on the report page.
+
+### RANKX Function
+- Purpose: Ranks items in a table or by a specific expression.
+Syntax:
+```dax
+RANKX(table, expression [, value] [, order] [, ties])
+```
+- table: The table over which ranking is applied.
+- expression: The expression or measure to rank.
+- value (optional): The value to rank for the current row.
+- order (optional): Specify ranking in ascending or descending order (default is descending).
+- ties (optional): Handle tied rankings (default is skip ranks for ties).
+### Example:
+```dax
+RANKX(ALL(Sales), SUM(Sales[Revenue]))
+```
+Ranks products based on their total revenue.
