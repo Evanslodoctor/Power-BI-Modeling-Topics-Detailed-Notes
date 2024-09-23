@@ -586,7 +586,79 @@ Total Sales = SUM(Sales[Revenue])
 - **TOTALYTD, TOTALQTD, TOTALMTD**:
   - Calculate year-to-date, quarter-to-date, or month-to-date totals.
   - Example: `Total Sales YTD = TOTALYTD(SUM(Sales[Revenue]), Dates[Date])`
-
+- **DATESMTD**
+ 
+--  DATESMTD returns the dates from the first day of the currently selected
+--  month to the last date visible in the filter context.
+ ```dax
+EVALUATE
+CALCULATETABLE (
+    DATESMTD ( 'Date'[Date] ),
+    'Date'[Date] = DATE ( 2007, 5, 6 )
+)
+ORDER BY [Date] ASC
+```
+--  **TOTALQTD** is just syntax sugar for CALCULATE / DATESQTD
+```
+EVALUATE
+CALCULATETABLE (
+    { (
+        CALCULATE (           
+            [Sales Amount],
+            DATESMTD ( 'Date'[Date] ) -- 2007-05-01 : 2007-05-06
+        ),
+        TOTALMTD (           -- 2007-05-01 : 2007-05-06
+            [Sales Amount],
+            'Date'[Date]      
+        )
+    ) },
+    'Date'[Date] = DATE ( 2007, 5, 12 )
+```
+--  **TOTALQTD** is just syntax sugar for CALCULATE / DATESQTD
+```
+EVALUATE
+CALCULATETABLE (
+    { (
+        CALCULATE (           
+            [Sales Amount],
+            DATESMTD ( 'Date'[Date] ) -- 2007-05-01 : 2007-05-06
+        ),
+        TOTALMTD (           -- 2007-05-01 : 2007-05-06
+            [Sales Amount],
+            'Date'[Date]      
+        )
+    ) },
+    'Date'[Date] = DATE ( 2007, 5, 12 )
+)
+)
+```
+--  **TOTALYTD** is just syntax for CALCULATE / DATESYTD
+```
+EVALUATE
+CALCULATETABLE (
+    { (
+        CALCULATE (           
+            [Sales Amount],
+            DATESYTD ( 'Date'[Date] ) -- 2007-01-01 : 2007-05-12
+        ),
+        TOTALYTD (           -- 2007-01-01 : 2007-05-12
+            [Sales Amount],
+            'Date'[Date]      
+        )
+    ) },
+    'Date'[Date] = DATE ( 2007, 5, 12 )
+)
+```
+--  **DATESQTD** returns the dates from the first day of the currently selected
+--  quarter to the last date visible in the filter context.
+```
+EVALUATE
+CALCULATETABLE (
+    DATESQTD ( 'Date'[Date] ),
+    'Date'[Date] = DATE ( 2007, 5, 12 )
+)
+ORDER BY [Date] ASC
+```
 - **DATESYTD, DATESQTD, DATESMTD**:
   - Return a table of dates for the specified period.
   - Example: Used in conjunction with other functions like `CALCULATE`.
